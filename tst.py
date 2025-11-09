@@ -12,7 +12,7 @@ class TST:
         self.root = None
 
     def put(self, sequence, val):
-        self.root = self.put(self.root, sequence, val, 0)
+        self.root = self._put(self.root, sequence, val, 0)
 
     def _put(self, current_node, sequence, val, index):
         character = sequence[index]
@@ -47,7 +47,7 @@ class TST:
         character = sequence[index]
         if current_node.character == character:
             if index == len(sequence) - 1:  # last char in sequence
-                return current_node.val
+                return current_node
             else:
                 return self._get(current_node.middle, sequence, index + 1)
         elif character < current_node.character:
