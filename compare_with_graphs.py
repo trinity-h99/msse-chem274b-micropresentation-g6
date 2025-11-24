@@ -10,7 +10,9 @@ from tst import TST
 
 
 A_ascii = 65
-Z_ascii = 90
+C_ascii = 67
+G_ascii = 71
+T_ascii = 84
 
 
 """
@@ -20,13 +22,22 @@ python compare_with_graphs.py
 
 
 
-def generate_random_word():
-    # words are just random letters A-Z, and of random lengths between 3 and 12 letters
+def generate_random_word(min_length=3, max_length=12):
+    # words are just random DNA letters (A, C, T, G), and of random lengths between 3 and 12 letters by default
+    # Note that doing random letters from A-Z doesnt have much overlap so the TST took up a lot of space
+    # having longer lengths didnt have much overlap either
     s = []
-    for _ in range(random.randint(3, 12)):
-        letter = chr(random.randint(A_ascii, Z_ascii))
+    for _ in range(random.randint(min_length, max_length)):
+        letter = chr([A_ascii, C_ascii, G_ascii, T_ascii][random.randint(0, 3)])
         s.append(letter)
     return ''.join(s)
+
+def swap_random_letter(word):
+    random_index = random.randint(0, len(word) - 1)
+    swapped_letter = chr([A_ascii, C_ascii, G_ascii, T_ascii][random.randint(0, 3)])
+    word = list(word)
+    word[random_index] = swapped_letter
+    return ''.join(word)
 
 
 def create_data_structures():
@@ -50,9 +61,16 @@ def create_data_structures():
     set100k = set()
 
     words_to_search_for = []
+    words_generated = [] # used so we have common sequences (overlap)
 
     for i in range(1000):
-        word = generate_random_word()
+        # 50% of the time we will use a word already in the dict, but slighty modified to ensure there is some overlap
+        if i % 2 == 0 and i > 0:
+            random_existing_word = random.sample(words_generated, 1)[0]
+            word = swap_random_letter(random_existing_word)
+        else:
+            word = generate_random_word()
+        words_generated.append(word)
         tst1k.put(word, i)
         tst10k.put(word, i)
         tst100k.put(word, i)
@@ -302,6 +320,6 @@ def graph_search_speeds():
 
 
 if __name__ == '__main__':
-    graph_insert_speeds()
-    graph_search_speeds()
+    # graph_insert_speeds()
+    # graph_search_speeds()
     graph_space_used()
