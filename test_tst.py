@@ -11,11 +11,11 @@ class TestTST:
         for i, word in enumerate(word_list):
             tst.put(word, i + 1)  # TODO: what should the value be?
         return tst
-    
+
     def test_adds_sequences_correctly(self):
         sequences = ['AABHSNK', 'WNHJJJE', 'EPJKKSK', 'EPJKKSKSS', 'EPJKKSA']
         tst = self._create_tst(sequences)
         assert tst.contains('EPJKKSK') == True
         assert tst.contains('EPJKKSKSS') == True
         assert tst.contains('EPJKKSKSL') == False
-        assert tst.get('EPJKKSKSS') == 4
+        assert tst.get('EPJKKSKSS') == 4    

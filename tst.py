@@ -54,3 +54,13 @@ class TST:
             return self._get(current_node.left, sequence, index)
         else:
             return self._get(current_node.right, sequence, index)
+
+
+class TSTVisualizer:
+    """
+    takes in a TST, and creates a networkx graph of it. This graph can then be printed to a PNG file
+    """
+    def __init__(self, TST):
+        import networkx as nx
+        G = nx.Graph()
+        # TODO finish
