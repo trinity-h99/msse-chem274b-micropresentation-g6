@@ -12,7 +12,7 @@ class TSTNode:
 
 class TST:
     def __init__(self):
-        #Root node of the whole TST
+        #Root node of the TST
         self.root = None
 
     def put(self, sequence, val):
