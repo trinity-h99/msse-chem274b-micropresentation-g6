@@ -1,7 +1,10 @@
 class TSTNode:
     def __init__(self, _character):
+        #Each node stores a single character from the key 
         self.character = _character
+        #Value only stored at the final character of a full key
         self.val = None
+        #Three-way branching
         self.left = None
         self.right = None
         self.middle = None
@@ -14,33 +17,44 @@ class TSTNode:
 
 class TST:
     def __init__(self):
+        #Root node of the TST
         self.root = None
 
     def put(self, sequence, val):
+        """
+        Insert a sequence into the TST.
+        'val' is whatever value we want to store at the terminal node. 
+        """
         self.root = self._put(self.root, sequence, val, 0)
 
     def _put(self, current_node, sequence, val, index):
         character = sequence[index]
+        #Create a new node if needed
         if current_node is None:
             current_node = TSTNode(character)
-
+        #Navigate or insert based on character comparisons
         if current_node.character == character:
             if index == len(sequence) - 1:  # last char in sequence
                 current_node.val = val
             else:
+                #for sunsequent characters, continued down the middle
                 current_node.middle = self._put(current_node.middle, sequence, val, index + 1)
         elif character < current_node.character:
+            #Searching left subtree for smaller characters
             current_node.left = self._put(current_node.left, sequence, val, index)
         else:
+            #Searching right subtree for larger characters
             current_node.right = self._put(current_node.right, sequence, val, index)
 
         return current_node
 
 
     def contains(self, sequence):
+        #Checking if a full sequence exists in the TST
         return self.get(sequence) is not None
 
     def get(self, sequence):
+        # Retrieving the value associated with a full sequence, if none found it returns None
         node = self._get(self.root, sequence, 0)
         if node is None:
             return None
@@ -50,11 +64,13 @@ class TST:
         if current_node is None:
             return None
         character = sequence[index]
+        #Character matches: move forward in the string
         if current_node.character == character:
             if index == len(sequence) - 1:  # last char in sequence
                 return current_node
             else:
                 return self._get(current_node.middle, sequence, index + 1)
+        #Otherwise navigate left or right    
         elif character < current_node.character:
             return self._get(current_node.left, sequence, index)
         else:
