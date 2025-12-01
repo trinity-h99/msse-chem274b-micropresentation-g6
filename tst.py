@@ -75,3 +75,55 @@ class TST:
             return self._get(current_node.left, sequence, index)
         else:
             return self._get(current_node.right, sequence, index)
+        
+
+class IterativeTST:
+    def __init__(self):
+        self.root = None
+
+    def put(self, key, value):
+        if not key:
+            return
+        if self.root is None:
+            self.root = TSTNode(key[0])
+        node = self.root
+        index = 0
+        while True:
+            c = key[index]
+            if c < node.character:
+                if node.left is None:
+                    node.left = TSTNode(c)
+                node = node.left
+            elif c > node.character:
+                if node.right is None:
+                    node.right = TSTNode(c)
+                node = node.right
+            else:  # c == node.char
+                index += 1
+                if index == len(key):
+                    node.val = value
+                    return
+                if node.middle is None:
+                    node.middle = TSTNode(key[index])
+                node = node.middle
+
+    def get(self, key):
+        if not key or self.root is None:
+            return None
+        node = self.root
+        index = 0
+        while node:
+            c = key[index]
+            if c < node.character:
+                node = node.left
+            elif c > node.character:
+                node = node.right
+            else:
+                index += 1
+                if index == len(key):
+                    return node.val
+                node = node.middle
+        return None
+
+    def contains(self, key):
+        return self.get(key) is not None
