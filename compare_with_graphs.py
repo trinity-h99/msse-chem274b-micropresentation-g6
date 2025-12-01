@@ -316,7 +316,6 @@ def graph_search_speeds():
         ax.bar(i, item['time'], width, label=label)
     ax.legend(loc='upper left', ncols=3)
     plt.show()
-    
 
 
 if __name__ == '__main__':
