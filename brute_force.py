@@ -19,12 +19,14 @@ def brute_force_search(text: str, pattern: str) -> int:
     m = len(pattern)
 
     for i in range(n - m + 1):
-        ok = True
-        for j in range(m):
-            if text[i + j] != pattern[j]:
-                ok = False
-                break
-        if ok:
+        j = 0
+        # Compare the characters one by one
+        while j < m and text[i + j] == pattern[j]:
+            j += 1
+        # If we matched the full pattern, return the index
+        if j == m:
             return i
     return -1
+
+
 
