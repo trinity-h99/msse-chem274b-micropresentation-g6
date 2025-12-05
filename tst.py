@@ -1,4 +1,12 @@
 class TSTNode:
+    """
+    Ternary Search Trie (TST)
+
+    Each node stores:
+    - a single character
+    - an optional value if this character is the end of a full key
+    - three child pointers: left, middle, right
+    """
     def __init__(self, _character):
         #Each node stores a single character from the key 
         self.character = _character
@@ -75,3 +83,69 @@ class TST:
             return self._get(current_node.left, sequence, index)
         else:
             return self._get(current_node.right, sequence, index)
+        
+
+class IterativeTST:
+    """
+    Iterative implementation of a Ternary Search Trie.
+    Eliminates recursion, this has the same behavior but more memory efficient.
+    """
+    def __init__(self):
+        self.root = None
+
+    def put(self, key, value):
+        # Insert key but not using recursion
+        if not key:
+            return
+        # Initilize root if empty
+        if self.root is None:
+            self.root = TSTNode(key[0])
+        node = self.root
+        index = 0
+        # Loop until full key is inserted
+        while True:
+            c = key[index]
+            #Navigate left
+            if c < node.character:
+                if node.left is None:
+                    node.left = TSTNode(c)
+                node = node.left
+                #Navigate right
+            elif c > node.character:
+                if node.right is None:
+                    node.right = TSTNode(c)
+                node = node.right
+            else:  # c == node.char
+                index += 1
+                if index == len(key):
+                    node.val = value
+                    return
+                if node.middle is None:
+                    node.middle = TSTNode(key[index])
+                node = node.middle
+
+    def get(self, key):
+        """
+        Iterative search implementation.
+        Returns stored value or None if key not found.
+        """
+        if not key or self.root is None:
+            return None
+        node = self.root
+        index = 0
+        while node:
+            c = key[index]
+            if c < node.character:
+                node = node.left
+            elif c > node.character:
+                node = node.right
+            else:
+                index += 1
+                if index == len(key):
+                    return node.val
+                node = node.middle
+        #If traversal ends with no match
+        return None
+
+    def contains(self, key):
+        return self.get(key) is not None

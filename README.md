@@ -1,44 +1,113 @@
 ## MSSE-CHEM274B-Micropresentation
 ## A simple pattern-matching and brute-force substring search algorithm using a Ternary Search Trie (TST) for genome assembly 
 
-# Group 6: Dongwan Kim, Trinity Ho, Robert Craig Wallace, and Priscilla Vaskez
+# Group 6: 
+
+Dongwan Kim, Trinity Ho, Robert Craig Wallace, and Priscilla Vaskez
 
 https://docs.google.com/document/d/1xhsegW8prdSqqZbf1JeJ4FINKRPU9wh7IGOpU9e40_4/edit?tab=t.0
 
-# Overview
 
-This repository explores how DNA sequence pattern-matching can be performed using three different algorithmic approaches:
 
-# Brute-Force Search
+## Overview
 
-Ternary Search Tree (TST) – Recursive version
-Ternary Search Tree (TST) – Iterative version
+This project compares three pattern-matching strategies applied to real biological DNA sequences:
 
-The goal of this micro-presentation is to compare time and space efficiency when searching real biological genomes, including:
-The E. coli K-12 genome (~4.6 Mbp)
-The lac operon genes (lacZ, lacY, lacI)
-A eukaryotic example using yeast ACT1 (~12 Mbp genome)
+1. Brute-Force Search
+2. Ternary Search Trie (TST) — Recursive version
+3. Ternary Search Trie (TST) — Iterative version
 
-This project shows how algorithmic choices dramatically impact performance when scaling from simple examples (like the sickle-cell mutation) to realistic genome sizes and multi-pattern searches.
+The goal is to examine how these algorithms behave on real biological datasets and to understand how performance changes when scaling from small genes to full chromosomes. Our tests include:
 
-# We demonstrate:
+* *E. coli* K-12 genome (~4.6 Mbp)
+* lac operon genes: **lacZ**, **lacY**, **lacI**
+* **Yeast ACT1** gene
+* **Human chromosome 21** with KCNE1 and KCNE2 genes
 
-Why brute-force searching becomes inefficient with large genomes
-Why TST enables rapid multi-pattern matching
-How iterative TST improves auxiliary space compared to recursive TST
-Real-world performance differences validated using group-generated timing graphs
-Files Contained in This Repository
-DNA and Genome Data
-ecoli_genome.fasta — Full E. coli K-12 genome (~4.6 million bp)
-lacZ_gene.fna — lacZ gene sequence
-lacY_gene.fna — lacY gene sequence
-lacI_gene.fna — lacI gene sequence
-yeast.fna — Yeast genome
-act1_gene.fna — Yeast ACT1 gene
+The project demonstrates that brute-force becomes slow as genomes get larger, while the TST enables fast, scalable multi-pattern matching.
 
-# Python Notebooks & Scripts
+---
 
+## **What This Project Demonstrates**
+
+- Brute-force search requires rescanning the entire sequence for each pattern
+- TST search depends only on the pattern length
+- TST is ~15–20× faster for *E. coli* codon searches
+- TST is ~1,000,000× faster than brute-force on human chromosome 21
+- Results are repeatable using the included notebooks and scripts
+- Both recursive and iterative TST implementations behave correctly
+
+---
+
+## **Repository Structure**
+
+### **Genome & Gene Data**
+
+```
+ecoli_genome.fasta      # Full E. coli genome (~4.6 Mbp)
+lacZ_gene.fna           # lacZ gene
+lacY_gene.fna           # lacY gene
+lacI_gene.fna           # lacI gene
+yeast.fna               # Yeast genome
+act1_gene.fna           # Yeast ACT1 gene
+human21.fna             # Human chromosome 21
+kcne1.fna               # Human KCNE1 gene
+kcne2.fna               # Human KCNE2 gene
+```
+
+---
+
+### **Python Code & Notebooks**
+
+```
+brute_force.ipynb         # Brute-force implementation and E. coli tests
+tst.py                     # Recursive TST implementation
+tst_notebook.ipynb         # TST tests and demonstration
+visualizer.py              # TST node/structure visualization
+sequence_utils.py          # FASTA loading helpers
+compare_with_graphs.py     # Timing comparison script
+lacZ_graphs.ipynb          # Generates bar graphs for performance
+test_ecoli_tst.py          # TST testing of lac operon genes
+test_ecoli_bf.py           # Brute-force testing for same genes
+test_human_tst.py          # Tests for human KCNE genes (optional)
+```
+
+---
+
+## **How to Set Up the Environment**
+
+### **1. Create the Conda environment**
+
+```bash
+make create_env
+conda activate tst-micro-presentation
+```
+
+### **2. Run tests**
+
+```bash
+pytest -v
+```
+
+### **3. Remove environment**
+
+```bash
+make remove-env
+```
+
+---
+
+# **How to Reproduce All Results**
+
+## 1. E. coli (lacZ, lacY, lacI)
+
+### Brute-force
+
+Open:
+
+```
 brute_force.ipynb
+
 Implements brute-force string matching
 Includes HBB example, cDNA generation, and E. coli brute-force tests
 tst_notebook.ipynb
@@ -57,10 +126,14 @@ Timing and performance comparison for brute-force vs. TST
 
 # Configuration
 
-<<<<<<< Updated upstream
+
 Makefile — Automates environment creation and removal
 environment.yaml — Conda environment specification
-=======
+
+```
+
+Run:
+
 ```
 “Testing E. coli genome and lac operon genes”
 ```
@@ -83,6 +156,13 @@ Run all cells to generate timing bar charts comparing:
 
 * Iterative TST
 * Brute-force
+
+---
+
+
+# **Results**
+
+All results below come directly from your real runs.
 
 ---
 
@@ -186,7 +266,8 @@ To reproduce any dataset:
 4. Generate timing graphs
 
 Everything needed for full reproducibility is included in the repository.
->>>>>>> Stashed changes
+
+
 
 ## References
 
