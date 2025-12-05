@@ -107,6 +107,29 @@ Open:
 
 ```
 brute_force.ipynb
+
+Implements brute-force string matching
+Includes HBB example, cDNA generation, and E. coli brute-force tests
+tst_notebook.ipynb
+Implements recursive TST insertion + search
+Includes performance testing and comparison graphs
+test_ecoli_tst.py
+TST tests for lacZ, lacY, lacI
+test_ecoli_bf.py
+Brute-force tests using the E. coli genome and lac operon genes
+tst.py
+Contains TST class, recursive version
+visualizer.py
+TST tree visualizer for understanding node structure
+compare_with_graphs.py
+Timing and performance comparison for brute-force vs. TST
+
+# Configuration
+
+
+Makefile — Automates environment creation and removal
+environment.yaml — Conda environment specification
+
 ```
 
 Run:
@@ -135,6 +158,7 @@ Run all cells to generate timing bar charts comparing:
 * Brute-force
 
 ---
+
 
 # **Results**
 
@@ -242,4 +266,57 @@ To reproduce any dataset:
 4. Generate timing graphs
 
 Everything needed for full reproducibility is included in the repository.
+
+
+
+## References
+
+### **Biological Data Sources**
+
+1. **E. coli K-12 MG1655 Genome**
+   [https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/)
+
+2. **lac Operon Genes (lacZ, lacY, lacI)**
+   [https://www.ncbi.nlm.nih.gov/nuccore/](https://www.ncbi.nlm.nih.gov/nuccore/)
+
+3. **Yeast ACT1 Gene (Saccharomyces cerevisiae)**
+   [https://www.ncbi.nlm.nih.gov/nuccore/](https://www.ncbi.nlm.nih.gov/nuccore/)
+
+4. **Human Chromosome 21 FASTA (for KCNE1/KCNE2 tests)**
+   [https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.40/](https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.40/)
+
+5. **KCNE1 and KCNE2 Genes**
+   [https://www.ncbi.nlm.nih.gov/nuccore/](https://www.ncbi.nlm.nih.gov/nuccore/)
+
+---
+
+### **Algorithm / Computer Science Resources**
+
+6. **Sedgewick, R., & Wayne, K. *Algorithms, 4th Edition*.**
+   This was used in reference for TSTs.
+
+7. **TST Visualization Tool (used by your group to verify structure)**
+   [https://www.cs.usfca.edu/~galles/visualization/TST.html](https://www.cs.usfca.edu/~galles/visualization/TST.html)
+
+8. **UC Berkeley bCourses Lecture Slides**
+
+   * Discussion 6: Tries, kd-trees, TSTs
+   * Discussion 9: Brute-force substring search
+
+---
+
+### **Biological Concept Images**
+
+
+9. **NCBI lac operon figure**
+   [https://www.ncbi.nlm.nih.gov/books/NBK526/figure/ch4.f1/](https://www.ncbi.nlm.nih.gov/books/NBK526/figure/ch4.f1/)
+
+
+10. **BLAST (used conceptually at start of project idea)**
+    [https://blast.ncbi.nlm.nih.gov/](https://blast.ncbi.nlm.nih.gov/)
+
+11. **Biopython Quickstart Page**
+    [https://biopython.org/docs/latest/Tutorial/chapter_quick_start.html](https://biopython.org/docs/latest/Tutorial/chapter_quick_start.html)
+
+
 
