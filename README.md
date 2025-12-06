@@ -93,6 +93,12 @@ pytest -v
 make remove-env
 ```
 
+### **4. Benchmark and Visualize
+```
+python compare_with_graphs.py
+python visualize.py
+```
+
 ---
 
 # **How to Reproduce All Results**
