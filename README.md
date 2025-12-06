@@ -260,8 +260,8 @@ This explains why brute-force collapses on human-scale data, while TST finishes 
 Recursive TST calls itself per character when inserting.
 
 ```
-Auxiliary space: O(N)
-N = genome length
+Auxiliary space: O(M)
+M = pattern length
 ```
 
 Iterative TST uses while loop.
