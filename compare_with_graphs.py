@@ -7,6 +7,7 @@ from types import ModuleType, FunctionType
 import matplotlib.pyplot as plt
 
 from tst import TST
+from visualizer import TSTVisualizer
 
 
 A_ascii = 65
@@ -170,10 +171,10 @@ def graph_space_used():
         title='Memory Usage',
         ylabel='Size in MB',
     )
+    ax.set_xticks(ticks=[x for x in range(9)], labels=[k for k in objs.keys()])
     width = 0.25  # the width of the bars
     for i, (label, item) in enumerate(objs.items()):
         ax.bar(i, item['size'], width, label=label)
-    ax.legend(loc='upper left', ncols=3)
     plt.show()
 
 
@@ -240,10 +241,10 @@ def graph_insert_speeds():
         title='Insert Times',
         ylabel='Time in Seconds',
     )
+    ax.set_xticks(ticks=[x for x in range(9)], labels=[k for k in objs.keys()])
     width = 0.25  # the width of the bars
     for i, (label, item) in enumerate(objs.items()):
         ax.bar(i, item['time'], width, label=label)
-    ax.legend(loc='upper left', ncols=3)
     plt.show()
 
 
@@ -311,14 +312,43 @@ def graph_search_speeds():
         title='Search Times',
         ylabel='Time in Seconds',
     )
+    ax.set_xticks(ticks=[x for x in range(9)], labels=[k for k in objs.keys()])
     width = 0.25  # the width of the bars
     for i, (label, item) in enumerate(objs.items()):
         ax.bar(i, item['time'], width, label=label)
-    ax.legend(loc='upper left', ncols=3)
     plt.show()
+
+def get_compression_ratio():
+    tst100k = TST()
+    list100k = []
+    for i in range(20):
+        word = generate_random_word()
+        tst100k.put(word, i)
+        list100k.append(word)
+    def node_count(tst):
+        count = 0
+        nodes = [tst.root]
+        while nodes:
+            node = nodes.pop()
+            count += 1
+            if node.middle:
+                nodes.append(node.middle)
+            if node.left:
+                nodes.append(node.left)
+            if node.right:
+                nodes.append(node.right)
+        return count
+    print(f'tst node count: {node_count(tst100k)}')
+    print(f"list char count: {len(''.join(list100k))}")
+    visualizer = TSTVisualizer(tst100k)
+    visualizer.visualize()
+
+
+
 
 
 if __name__ == '__main__':
-    # graph_insert_speeds()
-    # graph_search_speeds()
+    get_compression_ratio()
+    graph_insert_speeds()
+    graph_search_speeds()
     graph_space_used()
