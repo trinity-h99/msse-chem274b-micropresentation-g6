@@ -46,7 +46,7 @@ class TSTVisualizer:
                 return
             positions[node] = (x, y)
             next_y = y - 1
-            next_spacing = x_spacing / 2
+            next_spacing = x_spacing - 4
             if node.left:
                 assign_positions(node.left, x - x_spacing, next_y, next_spacing)
             if node.middle:
@@ -78,7 +78,9 @@ class TSTVisualizer:
 
 
 if __name__ == '__main__':
-    words = ['she', 'sells', 'sea', 'shells', 'by', 'shore', 'shell']
+    # words = ['she', 'sells', 'sea', 'shells', 'by', 'shore', 'shell']
+    # words = ['craig', 'samantha', 'kalyssa', 'priscilla', 'trinity', 'dongwan']
+    words = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X']
     tst = TST()
     for i, word in enumerate(words):
         tst.put(word, i + 1)
