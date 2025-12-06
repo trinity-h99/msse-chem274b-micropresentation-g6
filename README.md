@@ -276,6 +276,8 @@ The auxiliary space complexity is the main complexity difference between recursi
 
 Recursive TST is commonly adopted due to its readable and intuitive design, however, recursive TST cannot handle large genomes because Python has a recursion depth limited to 1000. `RecursionError` appears quickly when inserting or searching long sequences. Recursive TST is best for small and medium-sized genome datasets.
 
+### **Iterative TST**
+
 Iterative TST can handle large genome datasets because it does not use recursive thus avoiding Python's stack limitation. Iterative TST is not chosen over recursive TST because of the complicated traversal and node comparisons design.
 
 ---
