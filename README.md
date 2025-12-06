@@ -21,8 +21,7 @@ The goal is to examine how these algorithms behave on real biological datasets a
 
 * *E. coli* K-12 genome (~4.6 Mbp)
 * lac operon genes: **lacZ**, **lacY**, **lacI**
-* **Yeast ACT1** gene
-* **Human chromosome 21** with KCNE1 and KCNE2 genes
+* **Human chromosome 21** with KCNE1 and KCNE2 genes (~48 Mbp)
 
 The project demonstrates that brute-force becomes slow as genomes get larger, while the TST enables fast, scalable multi-pattern matching.
 
@@ -36,6 +35,7 @@ The project demonstrates that brute-force becomes slow as genomes get larger, wh
 - TST is ~1,000,000× faster than brute-force on human chromosome 21
 - Results are repeatable using the included notebooks and scripts
 - Both recursive and iterative TST implementations behave correctly
+- Advantages and limitations of recursive and iterative TST
 
 ---
 
@@ -48,8 +48,6 @@ ecoli_genome.fasta      # Full E. coli genome (~4.6 Mbp)
 lacZ_gene.fna           # lacZ gene
 lacY_gene.fna           # lacY gene
 lacI_gene.fna           # lacI gene
-yeast.fna               # Yeast genome
-act1_gene.fna           # Yeast ACT1 gene
 human21.fna             # Human chromosome 21
 kcne1.fna               # Human KCNE1 gene
 kcne2.fna               # Human KCNE2 gene
@@ -69,7 +67,7 @@ compare_with_graphs.py     # Timing comparison script
 lacZ_graphs.ipynb          # Generates bar graphs for performance
 test_ecoli_tst.py          # TST testing of lac operon genes
 test_ecoli_bf.py           # Brute-force testing for same genes
-test_human_tst.py          # Tests for human KCNE genes (optional)
+test_human_tst.py          # Tests for iterative TST with human KCNE genes (optional)
 ```
 
 ---
@@ -254,6 +252,34 @@ Search depends only on pattern length (M = 3 for codons)
 
 This explains why brute-force collapses on human-scale data, while TST finishes instantly.
 
+### **Comparison: Call stack differences of recursive TST and iterative TST**
+
+Recursive TST calls itself per character when inserting.
+
+```
+Auxiliary space: O(N)
+N = genome length
+```
+
+Iterative TST uses while loop.
+
+```
+Auxiliary space: O(1)
+```
+
+The auxiliary space complexity is the main complexity difference between recursive TST and iterative TST.
+
+---
+# ** Advantages and Limitations of TSTs (Recursive and Iterative) **
+
+### **Resursive TST**
+
+Recursive TST is commonly adopted due to its readable and intuitive design, however, recursive TST cannot handle large genomes because Python has a recursion depth limited to 1000. `RecursionError` appears quickly when inserting or searching long sequences. Recursive TST is best for small and medium-sized genome datasets.
+
+### **Iterative TST**
+
+Iterative TST can handle large genome datasets because it does not use recursive thus avoiding Python's stack limitation. Iterative TST is not chosen over recursive TST because of the complicated traversal and node comparisons design.
+
 ---
 
 # **Reproducibility Summary**
@@ -279,26 +305,24 @@ Everything needed for full reproducibility is included in the repository.
 2. **lac Operon Genes (lacZ, lacY, lacI)**
    [https://www.ncbi.nlm.nih.gov/nuccore/](https://www.ncbi.nlm.nih.gov/nuccore/)
 
-3. **Yeast ACT1 Gene (Saccharomyces cerevisiae)**
-   [https://www.ncbi.nlm.nih.gov/nuccore/](https://www.ncbi.nlm.nih.gov/nuccore/)
 
-4. **Human Chromosome 21 FASTA (for KCNE1/KCNE2 tests)**
+3. **Human Chromosome 21 FASTA (for KCNE1/KCNE2 tests)**
    [https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.40/](https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.40/)
 
-5. **KCNE1 and KCNE2 Genes**
+4. **KCNE1 and KCNE2 Genes**
    [https://www.ncbi.nlm.nih.gov/nuccore/](https://www.ncbi.nlm.nih.gov/nuccore/)
 
 ---
 
 ### **Algorithm / Computer Science Resources**
 
-6. **Sedgewick, R., & Wayne, K. *Algorithms, 4th Edition*.**
+5. **Sedgewick, R., & Wayne, K. *Algorithms, 4th Edition*.**
    This was used in reference for TSTs.
 
-7. **TST Visualization Tool (used by your group to verify structure)**
+6. **TST Visualization Tool (used by your group to verify structure)**
    [https://www.cs.usfca.edu/~galles/visualization/TST.html](https://www.cs.usfca.edu/~galles/visualization/TST.html)
 
-8. **UC Berkeley bCourses Lecture Slides**
+7. **UC Berkeley bCourses Lecture Slides**
 
    * Discussion 6: Tries, kd-trees, TSTs
    * Discussion 9: Brute-force substring search
@@ -308,14 +332,14 @@ Everything needed for full reproducibility is included in the repository.
 ### **Biological Concept Images**
 
 
-9. **NCBI lac operon figure**
+8. **NCBI lac operon figure**
    [https://www.ncbi.nlm.nih.gov/books/NBK526/figure/ch4.f1/](https://www.ncbi.nlm.nih.gov/books/NBK526/figure/ch4.f1/)
 
 
-10. **BLAST (used conceptually at start of project idea)**
+9. **BLAST (used conceptually at start of project idea)**
     [https://blast.ncbi.nlm.nih.gov/](https://blast.ncbi.nlm.nih.gov/)
 
-11. **Biopython Quickstart Page**
+10. **Biopython Quickstart Page**
     [https://biopython.org/docs/latest/Tutorial/chapter_quick_start.html](https://biopython.org/docs/latest/Tutorial/chapter_quick_start.html)
 
 
