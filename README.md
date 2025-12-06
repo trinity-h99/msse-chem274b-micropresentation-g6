@@ -154,6 +154,7 @@ Open:
 
 ```
 lacZ_graphs.ipynb
+kcne_graphs.ipynb
 ```
 
 Run all cells to generate timing bar charts comparing:
