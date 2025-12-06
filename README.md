@@ -270,7 +270,7 @@ Auxiliary space: O(1)
 The auxiliary space complexity is the main complexity difference between recursive TST and iterative TST.
 
 ---
-# ** Advantages and Limitations of TSTs (Recursive and Iterative) **
+# **Advantages and Limitations of TSTs (Recursive and Iterative)**
 
 ### **Resursive TST**
 
