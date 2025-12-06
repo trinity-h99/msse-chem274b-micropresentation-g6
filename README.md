@@ -167,10 +167,6 @@ Run all cells to generate timing bar charts comparing:
 
 # **Results**
 
-All results below come directly from your real runs.
-
----
-
 # **E. coli Results**
 
 ### **Gene Statistics**
@@ -285,7 +281,7 @@ Recursive TST is commonly adopted due to its readable and intuitive design, howe
 
 ### **Iterative TST**
 
-Iterative TST can handle large genome datasets because it does not use recursive thus avoiding Python's stack limitation. Iterative TST is not chosen over recursive TST because of the complicated traversal and node comparisons design.
+Iterative TST can handle large genome datasets because it does not use recursive, which avoids Python's stack limitation. Iterative TST is not chosen over recursive TST because of the complicated traversal and node comparisons design.
 
 ---
 
@@ -326,7 +322,7 @@ Everything needed for full reproducibility is included in the repository.
 5. **Sedgewick, R., & Wayne, K. *Algorithms, 4th Edition*.**
    This was used in reference for TSTs.
 
-6. **TST Visualization Tool (used by your group to verify structure)**
+6. **TST Visualization Tool**
    [https://www.cs.usfca.edu/~galles/visualization/TST.html](https://www.cs.usfca.edu/~galles/visualization/TST.html)
 
 7. **UC Berkeley bCourses Lecture Slides**
@@ -343,7 +339,7 @@ Everything needed for full reproducibility is included in the repository.
    [https://www.ncbi.nlm.nih.gov/books/NBK526/figure/ch4.f1/](https://www.ncbi.nlm.nih.gov/books/NBK526/figure/ch4.f1/)
 
 
-9. **BLAST (used conceptually at start of project idea)**
+9. **BLAST**
     [https://blast.ncbi.nlm.nih.gov/](https://blast.ncbi.nlm.nih.gov/)
 
 10. **Biopython Quickstart Page**
