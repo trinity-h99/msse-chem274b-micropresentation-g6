@@ -279,7 +279,7 @@ The auxiliary space complexity is the main complexity difference between recursi
 ---
 # **Advantages and Limitations of TSTs (Recursive and Iterative)**
 
-### **Resursive TST**
+### **Recursive TST**
 
 Recursive TST is commonly adopted due to its readable and intuitive design, however, recursive TST cannot handle large genomes because Python has a recursion depth limited to 1000. `RecursionError` appears quickly when inserting or searching long sequences. Recursive TST is best for small and medium-sized genome datasets.
 
